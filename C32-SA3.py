@@ -73,21 +73,11 @@ class CurrencyApp(App):
             size_hint=(0.3, 1),
             on_press=self.convert_and_show
         )
-       
-        reset_btn = Button(
-            text='RESET',
-            font_size=18,
-            background_color=(255, 0, 0, 1),
-            bold=True,
-            color=(1, 1, 1, 1),
-            size_hint=(0.2, 1)
-        )
-       
+  
 
         input_box.add_widget(self.text_input)
         input_box.add_widget(self.currency_spinner)
         input_box.add_widget(convert_btn)
-        input_box.add_widget(reset_btn)
         self.layout.add_widget(input_box)
 
         self.country_labels = {}
