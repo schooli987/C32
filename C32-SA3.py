@@ -45,7 +45,7 @@ class CurrencyApp(App):
         )
 
         self.text_input = TextInput(
-            hint_text='Enter Amount in USD',
+            hint_text='Enter Amount to Convert',
             multiline=False,
             input_filter='float',
             font_size=20,
@@ -118,7 +118,8 @@ class CurrencyApp(App):
 
         try:
             amount = float(amount_text)
-        except ValueError:
+        except:
+            print("Invalid amount entered.")
             return
 
         usd_to = {
@@ -136,30 +137,7 @@ class CurrencyApp(App):
                 label.text = f"{country}\n{converted_amount:.2f} {data['currency']}"
 
 
-    base_currency = "EUR"                        # Example: base currency selected is EUR
-    amount_text = "100"                         # Example: user input amount as string "100"
-    amount = float(amount_text)                  # Convert input string to float: 100.0
-
-    usd_to = {                                  # Hardcoded exchange rates with USD as base
-        "USD": 1.0,
-        "EUR": 0.92,
-        "CAD": 1.36,
-        "INR": 83.5,
-        "JPY": 157.4
-    }
-
-    usd_per_unit = 1 / usd_to[base_currency]   # Convert base currency to USD (1 EUR ≈ 1/0.92 ≈ 1.087 USD)
-
-    amount_in_usd = amount * usd_per_unit       # Convert input amount to USD (100 EUR ≈ 108.7 USD)
-
-    for country, data in COUNTRIES.items():     # Loop through each country in the dictionary
-        label = self.country_labels[country]    # Get label for current country
-        target_currency = data['currency']      # Target currency for the country
-
-        target_per_usd = usd_to[target_currency]    # USD to target currency rate (e.g. USD to INR = 83.5)
-        converted_amount = amount_in_usd * target_per_usd   # Convert USD amount to target currency
-
-        label.text = f"{country}\n{converted_amount:.2f} {target_currency}"  # Update label text with converted value
+  
 
 if __name__ == '__main__':
     CurrencyApp().run()
